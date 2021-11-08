@@ -30,7 +30,9 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run(){
         while(gameThread != null){
-            System.out.println("game running");
+            //System.out.println("game running");
+
+
         }
     }
 
