@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
             System.out.println("game running");
             update();
             repaint();
+
         };
     }
 
@@ -42,6 +43,9 @@ public class GamePanel extends JPanel implements Runnable{
    public void paintComponents(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.white);
+        g2.fillRect(100, 100, tileSize, tileSize);
+        g2.dispose();
     }
 
 }
