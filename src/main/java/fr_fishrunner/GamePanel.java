@@ -1,5 +1,4 @@
-package FishRunner;
-
+package fr_fishrunner;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Color;
@@ -25,15 +24,24 @@ public class GamePanel extends JPanel implements Runnable{
     public void startGameTh(){
         gameThread = new Thread(this);
         gameThread.start();
-    }
+    };
 
     @Override
     public void run(){
         while(gameThread != null){
-            //System.out.println("game running");
+            System.out.println("game running");
+            update();
+            repaint();
+        };
+    }
 
+    public void update(){
 
-        }
+    }
+
+    public void paintComponents(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D)g;
     }
 
 }

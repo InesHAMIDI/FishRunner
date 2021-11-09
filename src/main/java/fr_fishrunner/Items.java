@@ -1,6 +1,4 @@
-package FishRunner;
-
-import java.utils.*;
+package fr_fishrunner;
 
 public interface Items{
 

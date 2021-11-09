@@ -1,4 +1,4 @@
-package FishRunner;
+package fr_fishrunner;
 
 import javax.swing.JFrame;
 
@@ -11,7 +11,7 @@ public class Main {
         window.setResizable(false);//we don't want the player to resize as they want
         window.setTitle("Fish Runner");
 
-        GamePanel gamePanel = new GamePanel;
+        GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
 
