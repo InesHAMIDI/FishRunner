@@ -1,7 +1,7 @@
 package fr_fishrunner;
 import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.Color;
+import java.awt.*;
+
 
 public class GamePanel extends JPanel implements Runnable{
     final int TileSize = 16; //my sprites will be 16*16
@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(SWidth, SHeight)); //set the size of the JPanel
-        this.setBackground(color.black);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
     }
 
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
-    public void paintComponents(Graphics g){
+   public void paintComponents(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
     }
