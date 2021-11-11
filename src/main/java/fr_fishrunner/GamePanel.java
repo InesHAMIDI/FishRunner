@@ -1,12 +1,11 @@
 package fr_fishrunner;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
-
 public class GamePanel extends JPanel implements Runnable{
-    final int TileSize = 16; //my sprites will be 16*16
+    final int OTileSize = 16; //my sprites will be 16*16
     final int scale = 3;
-    final int tileSize = TileSize * scale; //we scale the sprites to be displayed properly 48*48px
+    final int tileSize = OTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
     final int maxCol = 16;
     final int maxRow = 12;
@@ -17,8 +16,9 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
 
     //Player default pos
-    int playerX = 100;
-    int playerY = 100;
+    int playerX = 150;
+    int playerInitY = 150;
+    int playerY = playerInitY;
     int playerSp = 4;
 
     public GamePanel(){
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
-    public void startGameTh(){
+    public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
     };
@@ -39,8 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
         while(gameThread != null){
             System.out.println("game running");
             update();
-            repaint();
-
+            repaint();//JPanel method that will call paintComponent
         };
     }
 
@@ -48,12 +47,15 @@ public class GamePanel extends JPanel implements Runnable{
         if(keyH.upPressed = true){
             playerY -= playerSp;
         }
+        else{
+            playerY = playerInitY;
+        }
     }
 
-   public void paintComponents(Graphics g){
+   public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.white);
+        Graphics2D g2 = (Graphics2D)g;//cast g to Graphics2D
+        g2.setColor(Color.blue);
         g2.fillRect(playerX, playerY, tileSize, tileSize);
         g2.dispose();
     }

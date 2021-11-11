@@ -7,10 +7,13 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed;
 
     @Override
-    public void KeyPressed(KeyEvent e){
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        if(code == KeyEvent.VK_Z || code == KeyEvent.VK_W)
-        {
+        if(code == KeyEvent.VK_Z || code == KeyEvent.VK_W) {
             upPressed = true;
         }
     }
