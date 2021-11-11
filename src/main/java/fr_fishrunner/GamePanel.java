@@ -3,9 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
-    final int OTileSize = 16; //my sprites will be 16*16
+    final int oTileSize = 16; //my sprites will be 16*16
     final int scale = 3;
-    final int tileSize = OTileSize * scale; //we scale the sprites to be displayed properly 48*48px
+    final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
     final int maxCol = 16;
     final int maxRow = 12;
