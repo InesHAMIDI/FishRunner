@@ -13,9 +13,6 @@ public class GamePanel extends JPanel implements Runnable{
     public Thread getGameThread() {
         return this.gameThread;
     }
-    public void setGameThread(Thread gameThread) {
-        this.gameThread = gameThread;
-    }
     public int getPlayerX() {
         return this.playerX;
     }
@@ -40,6 +37,9 @@ public class GamePanel extends JPanel implements Runnable{
     public void setPlayerSp(int playerSp) {
         this.playerSp = playerSp;
     }
+    public void setCurrentTime(long currentTime) {
+        this.currentTime = currentTime;
+    }
 
     private final int oTileSize = 16; //my sprites will be 16*16
     private final int scale = 3;
@@ -55,9 +55,20 @@ public class GamePanel extends JPanel implements Runnable{
 
     //Player default pos
     private int playerX = 150;
-    private int playerInitY = 150;
+    private int playerInitY = 400;
     private int playerY = playerInitY;
     private int playerSp = 4;
+
+    public double getDrawInterval() {
+        return drawInterval;
+    }
+    public void setDrawInterval(double drawInterval) {
+        this.drawInterval = drawInterval;
+    }
+
+    private double drawInterval;
+
+    private long currentTime;
 
     public GamePanel(){
         //576px
@@ -80,8 +91,11 @@ public class GamePanel extends JPanel implements Runnable{
 
     @Override
     public void run(){
+
+        this.setDrawInterval(10000000);
         while(gameThread != null){
             System.out.println("game running");
+            setCurrentTime(System.nanoTime());
             update();
             repaint();//JPanel method that will call paintComponent
         };
@@ -103,5 +117,6 @@ public class GamePanel extends JPanel implements Runnable{
         g2.fillRect(this.getPlayerX(), this.getPlayerY(), this.getTileSize(), this.getTileSize());
         g2.dispose();
     }
+
 
 }
