@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        if(keyH.upPressed = true){
+        if(keyH.isUpPressed()){
             playerY -= playerSp;
         }
         else{

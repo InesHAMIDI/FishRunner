@@ -11,7 +11,7 @@ public class KeyHandler implements KeyListener {
         this.upPressed = upPressed;
     }
 
-    public boolean upPressed;
+    private boolean upPressed;
 
     @Override
     public void keyTyped(KeyEvent e) {
