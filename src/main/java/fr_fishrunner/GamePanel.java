@@ -3,59 +3,39 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
-    public int getoTileSize() {
-        return oTileSize;
-    }
-    public int getScale() {
-        return scale;
-    }
-    public int getTileSize() {
-        return tileSize;
-    }
-    public int getMaxCol() {
-        return maxCol;
-    }
-    public int getMaxRow() {
-        return maxRow;
-    }
-    public int getSWidth() {
-        return SWidth;
-    }
-    public int getSHeight() {
-        return SHeight;
-    }
+
     public KeyHandler getKeyH() {
-        return keyH;
+        return this.keyH;
     }
     public void setKeyH(KeyHandler keyH) {
         this.keyH = keyH;
     }
     public Thread getGameThread() {
-        return gameThread;
+        return this.gameThread;
     }
     public void setGameThread(Thread gameThread) {
         this.gameThread = gameThread;
     }
     public int getPlayerX() {
-        return playerX;
+        return this.playerX;
     }
     public void setPlayerX(int playerX) {
         this.playerX = playerX;
     }
     public int getPlayerInitY() {
-        return playerInitY;
+        return this.playerInitY;
     }
     public void setPlayerInitY(int playerInitY) {
         this.playerInitY = playerInitY;
     }
     public int getPlayerY() {
-        return playerY;
+        return this.playerY;
     }
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
     public int getPlayerSp() {
-        return playerSp;
+        return this.playerSp;
     }
     public void setPlayerSp(int playerSp) {
         this.playerSp = playerSp;
@@ -63,12 +43,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     private final int oTileSize = 16; //my sprites will be 16*16
     private final int scale = 3;
-    private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
-    private final int maxCol = 16;
-    private final int maxRow = 12;
-    private final int SWidth = tileSize * maxCol;//768 px
-    private final int SHeight = tileSize * maxRow;//576px
+    public int getTileSize() {
+        return this.tileSize;
+    }
+
+    private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -80,8 +60,14 @@ public class GamePanel extends JPanel implements Runnable{
     private int playerSp = 4;
 
     public GamePanel(){
+        //576px
+        int maxRow = 12;
+        int SHeight = tileSize * maxRow;
+        //768 px
+        int maxCol = 20;
+        int SWidth = tileSize * maxCol;
         this.setPreferredSize(new Dimension(SWidth, SHeight)); //set the size of the JPanel
-        this.setBackground(Color.black);
+        this.setBackground(Color.blue);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -103,18 +89,18 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){
         if(keyH.isUpPressed()){
-            playerY -= playerSp;
+            setPlayerY(playerSp -1);
         }
         else{
-            playerY = playerInitY;
+            setPlayerY(playerInitY);
         }
     }
 
    public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;//cast g to Graphics2D
-        g2.setColor(Color.blue);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        g2.setColor(Color.black);
+        g2.fillRect(this.getPlayerX(), this.getPlayerY(), this.getTileSize(), this.getTileSize());
         g2.dispose();
     }
 
