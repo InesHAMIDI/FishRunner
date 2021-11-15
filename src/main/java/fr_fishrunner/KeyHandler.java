@@ -4,6 +4,13 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class KeyHandler implements KeyListener {
+    public boolean isUpPressed() {
+        return upPressed;
+    }
+    public void setUpPressed(boolean upPressed) {
+        this.upPressed = upPressed;
+    }
+
     public boolean upPressed;
 
     @Override

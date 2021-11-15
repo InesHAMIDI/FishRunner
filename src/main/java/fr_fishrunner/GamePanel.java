@@ -3,23 +3,81 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
-    final int oTileSize = 16; //my sprites will be 16*16
-    final int scale = 3;
-    final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
+    public int getoTileSize() {
+        return oTileSize;
+    }
+    public int getScale() {
+        return scale;
+    }
+    public int getTileSize() {
+        return tileSize;
+    }
+    public int getMaxCol() {
+        return maxCol;
+    }
+    public int getMaxRow() {
+        return maxRow;
+    }
+    public int getSWidth() {
+        return SWidth;
+    }
+    public int getSHeight() {
+        return SHeight;
+    }
+    public KeyHandler getKeyH() {
+        return keyH;
+    }
+    public void setKeyH(KeyHandler keyH) {
+        this.keyH = keyH;
+    }
+    public Thread getGameThread() {
+        return gameThread;
+    }
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+    public int getPlayerX() {
+        return playerX;
+    }
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
+    public int getPlayerInitY() {
+        return playerInitY;
+    }
+    public void setPlayerInitY(int playerInitY) {
+        this.playerInitY = playerInitY;
+    }
+    public int getPlayerY() {
+        return playerY;
+    }
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+    public int getPlayerSp() {
+        return playerSp;
+    }
+    public void setPlayerSp(int playerSp) {
+        this.playerSp = playerSp;
+    }
 
-    final int maxCol = 16;
-    final int maxRow = 12;
-    final int SWidth = tileSize * maxCol;//768 px
-    final int SHeight = tileSize * maxRow;//576px
+    private final int oTileSize = 16; //my sprites will be 16*16
+    private final int scale = 3;
+    private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
+
+    private final int maxCol = 16;
+    private final int maxRow = 12;
+    private final int SWidth = tileSize * maxCol;//768 px
+    private final int SHeight = tileSize * maxRow;//576px
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
     //Player default pos
-    int playerX = 150;
-    int playerInitY = 150;
-    int playerY = playerInitY;
-    int playerSp = 4;
+    private int playerX = 150;
+    private int playerInitY = 150;
+    private int playerY = playerInitY;
+    private int playerSp = 4;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(SWidth, SHeight)); //set the size of the JPanel
