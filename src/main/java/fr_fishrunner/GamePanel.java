@@ -38,6 +38,16 @@ public class GamePanel extends JPanel implements Runnable{
     private final int oTileSize = 16; //my sprites will be 16*16
     private final int scale = 3;
 
+    public double getNewDrawTime() {
+        return newDrawTime;
+    }
+
+    public void setNewDrawTime(double newDrawTime) {
+        this.newDrawTime = newDrawTime;
+    }
+
+    double newDrawTime;
+
 
     private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
@@ -58,6 +68,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     private double drawInterval;
+    private double remainingTime = this.getNewDrawTime() - System.nanoTime();
+
 
     private long currentTimeN;//en nano sec
 
@@ -73,6 +85,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        int FPS = 60;
+        double drawInterval = 1000000000/FPS;//en nano sec
     }
 
     public void startGameThread(){
@@ -85,10 +99,11 @@ public class GamePanel extends JPanel implements Runnable{
 
         this.setDrawInterval(10000000);
         while(gameThread != null){
-            System.out.println("game running");
             this.setCurrentTimeN(System.nanoTime());
+            this.setNewDrawTime(System.nanoTime() + drawInterval);
             update();
             repaint();//JPanel method that will call paintComponent
+            Thread.sleep(long remainingTime);
         };
     }
 
