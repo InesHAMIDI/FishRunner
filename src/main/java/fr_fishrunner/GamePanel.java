@@ -16,8 +16,8 @@ public class GamePanel extends JPanel implements Runnable{
     //Player default pos
     private int playerX = 150;
     private final int playerInitY = 400;
-    private int playerY = playerInitY;
-    private int playerSp = 4;
+    private int playerY;
+    private int playerSp = 2;
 
     private double drawInterval;
     private double remainingTime = this.getNextDrawTime() - System.nanoTime();
@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
         int FPS = 60;
         double drawInterval = 1000000000/FPS;//en nano sec
+        playerY = playerInitY;
     }
 
     public void startGameThread(){
@@ -71,10 +72,10 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){
         if(keyH.isUpPressed()){
-            this.setPlayerY(playerSp -1);
+            this.setPlayerY(playerY - playerSp);
         }
         else{
-            this.setPlayerY(playerInitY);
+            this.setPlayerY(playerY + playerSp);
         }
     }
 
@@ -109,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void setDrawInterval(double drawInterval) {
         this.drawInterval = drawInterval;
-    }*
+    }
     public void setRemainingTime(double remainingTime) {
         this.remainingTime = remainingTime;
     }

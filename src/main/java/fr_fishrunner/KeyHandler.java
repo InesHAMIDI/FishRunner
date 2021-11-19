@@ -21,7 +21,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_Z || code == KeyEvent.VK_W) {
-            upPressed = true;
+            this.setUpPressed(true);
         }
     }
 
@@ -29,7 +29,7 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_Z || code == KeyEvent.VK_W){
-            upPressed = false;
+            this.setUpPressed(false);
         }
     }
 
