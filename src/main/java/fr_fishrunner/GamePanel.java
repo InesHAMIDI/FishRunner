@@ -11,6 +11,9 @@ public class GamePanel extends JPanel implements Runnable{
         private double nextDrawTime;
         private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
+        private double delta;
+        private double lastTime;
+
         KeyHandler keyH = new KeyHandler();
         Thread gameThread;
 
@@ -18,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable{
         private int playerInitY = 400;
         private int playerX = 150;
         private int playerY = playerInitY;
-        private int playerSp = 5;
+        private int playerSp = 10;
         private final int FPS = 60;
         private double drawInterval = 1000000000/FPS;//en nano sec
         private double remainingTime;
@@ -66,6 +69,15 @@ public class GamePanel extends JPanel implements Runnable{
                     e.printStackTrace();
                 }
             };
+        }
+
+        public void run2(){
+            delta = 0;
+            lastTime = System.nanoTime();
+            while(gameThread !=null){
+                update();
+                repaint();
+            }
         }
 
     public void update(){
