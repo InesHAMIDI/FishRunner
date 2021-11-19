@@ -4,51 +4,10 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    public Thread getGameThread() {
-        return this.gameThread;
-    }
-    public int getPlayerX() {
-        return this.playerX;
-    }
-    public void setPlayerX(int playerX) {
-        this.playerX = playerX;
-    }
-    public int getPlayerInitY() {
-        return this.playerInitY;
-    }
-    public int getPlayerY() {
-        return this.playerY;
-    }
-    public void setPlayerY(int playerY) {
-        this.playerY = playerY;
-    }
-    public int getPlayerSp() {
-        return this.playerSp;
-    }
-    public void setPlayerSp(int playerSp) {
-        this.playerSp = playerSp;
-    }
-    public void setCurrentTimeN(long currentTimeN) {
-        this.currentTimeN = currentTimeN;
-    }
-    public int getTileSize() {
-        return this.tileSize;
-    }
-
     private final int oTileSize = 16; //my sprites will be 16*16
     private final int scale = 3;
 
-    public double getNewDrawTime() {
-        return newDrawTime;
-    }
-
-    public void setNewDrawTime(double newDrawTime) {
-        this.newDrawTime = newDrawTime;
-    }
-
-    double newDrawTime;
-
-
+    private double nextDrawTime;
     private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
     KeyHandler keyH = new KeyHandler();
@@ -56,22 +15,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     //Player default pos
     private int playerX = 150;
-    private int playerInitY = 400;
+    private final int playerInitY = 400;
     private int playerY = playerInitY;
     private int playerSp = 4;
 
-    public double getDrawInterval() {
-        return drawInterval;
-    }
-    public void setDrawInterval(double drawInterval) {
-        this.drawInterval = drawInterval;
-    }
-
     private double drawInterval;
-    private double remainingTime = this.getNewDrawTime() - System.nanoTime();
-
-
-    private long currentTimeN;//en nano sec
+    private double remainingTime = this.getNextDrawTime() - System.nanoTime();
 
     public GamePanel(){
         //576px
@@ -98,12 +47,25 @@ public class GamePanel extends JPanel implements Runnable{
     public void run(){
 
         this.setDrawInterval(10000000);
+        this.setNextDrawTime(System.nanoTime() + drawInterval);
+
         while(gameThread != null){
             this.setCurrentTimeN(System.nanoTime());
-            this.setNewDrawTime(System.nanoTime() + drawInterval);
             update();
             repaint();//JPanel method that will call paintComponent
-            Thread.sleep(long remainingTime);
+
+            try{
+                this.setRemainingTime(remainingTime/1000000);
+
+                if(remainingTime<0){
+                    this.setRemainingTime(0);
+                }
+
+                Thread.sleep((long) remainingTime);
+                nextDrawTime += drawInterval;
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
         };
     }
 
@@ -124,5 +86,31 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
-
+    public int getPlayerX() {
+        return this.playerX;
+    }
+    public int getPlayerY() {
+        return this.playerY;
+    }
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+    public void setCurrentTimeN(long currentTimeN) {
+        //en nano sec
+    }
+    public int getTileSize() {
+        return this.tileSize;
+    }
+    public double getNextDrawTime() {
+        return nextDrawTime;
+    }
+    public void setNextDrawTime(double nextDrawTime) {
+        this.nextDrawTime = nextDrawTime;
+    }
+    public void setDrawInterval(double drawInterval) {
+        this.drawInterval = drawInterval;
+    }*
+    public void setRemainingTime(double remainingTime) {
+        this.remainingTime = remainingTime;
+    }
 }
