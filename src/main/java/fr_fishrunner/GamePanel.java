@@ -13,6 +13,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         private double delta;
         private double lastTime;
+        private long timer;
 
         KeyHandler keyH = new KeyHandler();
         Thread gameThread;
@@ -25,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
         private final int FPS = 60;
         private double drawInterval = 1000000000/FPS;//en nano sec
         private double remainingTime;
+        private int drawCount;
 
         public GamePanel(){
             super();
@@ -46,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
             gameThread.start();
         };
 
-        @Override
+        /*@Override
         public void run(){
 
             nextDrawTime = System.nanoTime() + drawInterval;
@@ -69,14 +71,31 @@ public class GamePanel extends JPanel implements Runnable{
                     e.printStackTrace();
                 }
             };
-        }
+        }*/
 
-        public void run2(){
+        @Override
+        public void run(){
             delta = 0;
             lastTime = System.nanoTime();
+            timer = 0;
+            drawCount = 0;
             while(gameThread !=null){
-                update();
-                repaint();
+                currentTime = System.nanoTime();
+                delta += (currentTime - lastTime)/drawInterval;
+                timer += (currentTime - lastTime);
+                lastTime = currentTime;
+
+                if(delta >=1){
+                    update();
+                    repaint();
+                    delta--;
+                    drawCount++;
+                }
+                if (timer >= 1000000000){
+                    System.out.println("FPS " + drawCount);
+                    drawCount = 0;
+                    timer = 0;
+                }
             }
         }
 
