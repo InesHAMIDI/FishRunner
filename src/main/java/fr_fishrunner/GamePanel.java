@@ -48,31 +48,6 @@ public class GamePanel extends JPanel implements Runnable{
             gameThread.start();
         };
 
-        /*@Override
-        public void run(){
-
-            nextDrawTime = System.nanoTime() + drawInterval;
-
-            while(gameThread != null){
-                this.setCurrentTime(System.nanoTime());
-                update();
-                repaint();//JPanel method that will call paintComponent
-                remainingTime = nextDrawTime - System.nanoTime();
-                try{
-                    this.setRemainingTime(remainingTime/1000000);
-
-                    if(remainingTime<0){
-                        this.setRemainingTime(0);
-                    }
-
-                    Thread.sleep((long) remainingTime);
-                    nextDrawTime = drawInterval + System.nanoTime();
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-            };
-        }*/
-
         @Override
         public void run(){
             delta = 0;
