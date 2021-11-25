@@ -1,4 +1,7 @@
 package fr_fishrunner;
+import fr_fishrunner.entity.Player;
+import fr_fishrunner.tile.TileManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,6 +30,9 @@ public class GamePanel extends JPanel implements Runnable{
         private double drawInterval = 1000000000/FPS;//en nano sec
         private double remainingTime;
         private int drawCount;
+
+        TileManager tileM = new TileManager(this);
+        Player player = new Player();
 
         public GamePanel(){
             super();
@@ -75,20 +81,14 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
     public void update(){
-            if(keyH.isUpPressed()){
-                playerY -= playerSp;
-            }
-            else if (keyH.isUpPressed() == false)
-              {
-                playerY = playerInitY + playerSp;
-            }
+          player.update();
         }
 
        public void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D)g;//cast g to Graphics2D
-            g2.setColor(Color.black);
-            g2.fillRect(this.getPlayerX(), this.getPlayerY(), this.getTileSize(), this.getTileSize());
+            tileM.draw(g2);
+            player.draw(g2);
             g2.dispose();
         }
 
