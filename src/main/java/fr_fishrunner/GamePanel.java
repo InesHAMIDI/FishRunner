@@ -9,28 +9,12 @@ public class GamePanel extends JPanel implements Runnable{
 
         private final int oTileSize = 16; //my sprites will be 16*16
         private final int scale = 3;
-
-        private long currentTime;
-        private double nextDrawTime;
         private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
-        private double delta;
-        private double lastTime;
-        private long timer;
+       // private double nextDrawTime;
 
         KeyHandler keyH = new KeyHandler();
         Thread gameThread;
-
-        //Player default pos
-        private int playerInitY = 400;
-        private int playerX = 150;
-        private int playerY = playerInitY;
-        private int playerSp = 10;
-        private final int FPS = 60;
-        private double drawInterval = 1000000000/FPS;//en nano sec
-        private double remainingTime;
-        private int drawCount;
-
         TileManager tileM = new TileManager(this);
         Player player = new Player();
 
@@ -52,17 +36,20 @@ public class GamePanel extends JPanel implements Runnable{
         public void startGameThread(){
             gameThread = new Thread(this);
             gameThread.start();
-        };
+        }
 
         @Override
         public void run(){
-            delta = 0;
-            lastTime = System.nanoTime();
-            timer = 0;
-            drawCount = 0;
+            double delta = 0;
+            double lastTime = System.nanoTime();
+            long timer = 0;
+            int drawCount = 0;
             while(gameThread !=null){
-                currentTime = System.nanoTime();
-                delta += (currentTime - lastTime)/drawInterval;
+                long currentTime = System.nanoTime();
+                //en nano sec
+                int FPS = 60;
+                double drawInterval = 1000000000 / FPS;
+                delta += (currentTime - lastTime)/ drawInterval;
                 timer += (currentTime - lastTime);
                 lastTime = currentTime;
 
@@ -80,8 +67,8 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
 
-    public void update(){
-          player.update();
+        public void update(){
+            player.update();
         }
 
        public void paintComponent(Graphics g){
@@ -92,29 +79,8 @@ public class GamePanel extends JPanel implements Runnable{
             g2.dispose();
         }
 
-        public int getPlayerX() {
-            return this.playerX;
-        }
-        public int getPlayerY() {
-            return this.playerY;
-        }
-        public void setPlayerY(int playerY) {
-            this.playerY = playerY;
-        }
-        public void setCurrentTime(long currentTime){
-            this.currentTime = currentTime;//en nano sec
-        }
         public int getTileSize() {
             return this.tileSize;
         }
-        public double getNextDrawTime() {
-            return nextDrawTime;
-        }
-        public void setNextDrawTime(double nextDrawTime) {
-            this.nextDrawTime = nextDrawTime;
-        }
-        public void setRemainingTime(double remainingTime) {
-            this.remainingTime = remainingTime;
-        }
-        private void setDrawInterval(double i) {this.drawInterval = i;};
+
 }

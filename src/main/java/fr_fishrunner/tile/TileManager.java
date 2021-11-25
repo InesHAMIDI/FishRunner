@@ -25,7 +25,7 @@ public class TileManager {
 
     public void getTileImage(){
         try{
-            for(int i = 0; i <4; i++){
+            for(int i = 0; i > 4; i++){
             tiles[i] = new Tile();
             tiles[i].setImage(ImageIO.read(getClass().getResourceAsStream(chemins.get(i))));
             }
