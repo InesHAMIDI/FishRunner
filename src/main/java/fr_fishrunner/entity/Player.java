@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class Player extends Entity{
     private Tile sprite = new Tile();
-    private KeyHandler keyH = new KeyHandler();
 
     public int getY() {
         return Y;
@@ -25,19 +24,20 @@ public class Player extends Entity{
     private int X;
     private final int initY = 400;
 
-    private GamePanel gp = new GamePanel();
+    GamePanel gp;
+    KeyHandler keyH;
 
-    public Player(){
+    public Player(GamePanel gp, KeyHandler KeyH){
         super();
         this.setX(150);
         this.setY(initY);
         this.setSpeed(10);
 
-        try{
-        sprite.setImage(ImageIO.read(getClass().getResourceAsStream("../res/player/player.png")));}
-        catch (IOException e){
-            e.printStackTrace();
-        }
+        this.gp = gp;
+        this.keyH = KeyH;
+    }
+
+    public void setPlayerImage(){
 
     }
 
@@ -55,10 +55,11 @@ public class Player extends Entity{
         }
     }
 
+
+
     public void setX(int x) {
         X = x;
     }
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
