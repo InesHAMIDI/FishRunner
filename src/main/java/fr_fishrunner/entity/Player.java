@@ -4,6 +4,7 @@ import fr_fishrunner.KeyHandler;
 import fr_fishrunner.tile.Tile;
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity{
@@ -35,13 +36,19 @@ public class Player extends Entity{
 
         this.gp = gp;
         this.keyH = KeyH;
+        getPlayerImage();
     }
 
-    public void setPlayerImage(){
-
+    public void getPlayerImage() {
+        try{
+            sprite.setImage(ImageIO.read(getClass().getResourceAsStream("/player/player.png")));}
+        catch(IOException e){
+            e.printStackTrace();
+            }
     }
 
-    public void draw(Graphics2D g2)  {
+    public void draw (Graphics2D g2)  {
+        BufferedImage image = null;
         g2.drawImage(sprite.getImage(), X, Y, gp.getTileSize(), gp.getTileSize(), null);
     }
 
@@ -51,11 +58,9 @@ public class Player extends Entity{
         }
         else if (!keyH.isUpPressed())
         {
-            this.Y = initY + speed;
+            this.Y = initY + speed/2;
         }
     }
-
-
 
     public void setX(int x) {
         X = x;

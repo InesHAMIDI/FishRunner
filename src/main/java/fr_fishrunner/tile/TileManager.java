@@ -15,12 +15,12 @@ public class TileManager {
 
     public TileManager(GamePanel gp){
         this.gp = gp;
-        tiles = new Tile[3];
+        tiles = new Tile[5];
         getTileImage();
-        this.chemins.add("/tiles/fond1.png");
-        this.chemins.add("/tiles/fond2.png");
-        this.chemins.add("/tiles/fond3.png");
-        this.chemins.add("/tiles/fonduni.png");
+        this.chemins.add(0, "/tiles/fond1.png");
+        this.chemins.add(1,"/tiles/fond2.png");
+        this.chemins.add(2, "/tiles/fond3.png");
+        this.chemins.add(3, "/tiles/fonduni.png");
     }
 
     public void getTileImage(){

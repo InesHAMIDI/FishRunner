@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
             int maxCol = 20;
             int SWidth = tileSize * maxCol;
             this.setPreferredSize(new Dimension(SWidth, SHeight)); //set the size of the JPanel
-            this.setBackground(Color.blue);
+            this.setBackground(Color.black);
             this.setDoubleBuffered(true);
             this.addKeyListener(keyH);
             this.setFocusable(true);
