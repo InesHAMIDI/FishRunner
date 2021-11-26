@@ -6,10 +6,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Objects;
 
 public class TileManager {
-    private GamePanel gp;
+    /*private final GamePanel gp;
     private Tile[] tiles;
     private ArrayList<String> chemins = new ArrayList<>();
 
@@ -25,9 +25,9 @@ public class TileManager {
 
     public void getTileImage(){
         try{
-            for(int i = 0; i > 4; i++){
+            for(int i = 0; i < 4; i++){
             tiles[i] = new Tile();
-            tiles[i].setImage(ImageIO.read(getClass().getResourceAsStream(chemins.get(i))));
+            tiles[i].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(chemins.get(i)))));
             }
 
         }catch (IOException e){
@@ -39,5 +39,5 @@ public class TileManager {
         g2.drawImage(tiles[0].getImage(), 0, 0, gp.getTileSize(), gp.getTileSize(), null);
     }
 
-
+*/
 }

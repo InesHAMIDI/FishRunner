@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity{
-    private Tile sprite = new Tile();
 
     public int getY() {
         return Y;
@@ -41,7 +40,7 @@ public class Player extends Entity{
 
     public void getPlayerImage() {
         try{
-            sprite.setImage(ImageIO.read(getClass().getResourceAsStream("/player/player.png")));}
+            sprite = ImageIO.read(getClass().getResourceAsStream("/player/player.png"));}
         catch(IOException e){
             e.printStackTrace();
             }
@@ -49,7 +48,7 @@ public class Player extends Entity{
 
     public void draw (Graphics2D g2)  {
         BufferedImage image = null;
-        g2.drawImage(sprite.getImage(), X, Y, gp.getTileSize(), gp.getTileSize(), null);
+        g2.drawImage(sprite, X, Y, gp.getTileSize(), gp.getTileSize(), null);
     }
 
     public void update(){

@@ -8,14 +8,14 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
 
         private final int oTileSize = 16; //my sprites will be 16*16
-        private final int scale = 3;
+        private final int scale = 4;
         private final int tileSize = oTileSize * scale; //we scale the sprites to be displayed properly 48*48px
 
        // private double nextDrawTime;
 
         KeyHandler keyH = new KeyHandler();
         Thread gameThread;
-        TileManager tileM = new TileManager(this);
+        //TileManager tileM = new TileManager(this);
         Player player = new Player(this, keyH);
 
         public GamePanel(){
@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
        public void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D)g;//cast g to Graphics2D
-            tileM.draw(g2);
+            //tileM.draw(g2);
             player.draw(g2);
             g2.dispose();
         }
