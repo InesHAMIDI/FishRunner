@@ -1,7 +1,6 @@
 package fr_fishrunner.entity;
 import fr_fishrunner.GamePanel;
 import fr_fishrunner.KeyHandler;
-import fr_fishrunner.tile.Tile;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
