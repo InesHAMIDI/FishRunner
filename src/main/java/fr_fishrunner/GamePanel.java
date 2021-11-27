@@ -1,4 +1,5 @@
 package fr_fishrunner;
+import fr_fishrunner.entity.Obstacle;
 import fr_fishrunner.entity.Player;
 import fr_fishrunner.tile.TileManager;
 
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
         Thread gameThread;
         //TileManager tileM = new TileManager(this);
         Player player = new Player(this, keyH);
+        Obstacle obstacle = new Obstacle(this);
 
         public GamePanel(){
             super();
@@ -36,6 +38,9 @@ public class GamePanel extends JPanel implements Runnable{
         public void startGameThread(){
             gameThread = new Thread(this);
             gameThread.start();
+        }
+        public void stopGameThread(){
+            gameThread.interrupt();
         }
 
         @Override
@@ -68,13 +73,19 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         public void update(){
+            obstacle.update();
             player.update();
+            if(player.getX() == obstacle.getX()){
+                player.GameOver();
+
+            };
         }
 
        public void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D)g;//cast g to Graphics2D
             //tileM.draw(g2);
+            obstacle.draw(g2);
             player.draw(g2);
             g2.dispose();
         }

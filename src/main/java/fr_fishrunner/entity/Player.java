@@ -17,11 +17,19 @@ public class Player extends Entity{
     public int getSpeed() {
         return speed;
     }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     private int Y;
     private int speed;
     private int X;
     private final int initY = 400;
+
+    private int score;
 
     GamePanel gp;
     KeyHandler keyH;
@@ -31,6 +39,7 @@ public class Player extends Entity{
         this.setX(150);
         this.setY(initY);
         this.setSpeed(10);
+        this.setScore(0);
 
         this.gp = gp;
         this.keyH = KeyH;
@@ -56,8 +65,12 @@ public class Player extends Entity{
         }
         else if (!keyH.isUpPressed())
         {
-            this.Y = initY + speed/2;
+            this.Y = initY + speed/4;
         }
+    }
+
+    public int GameOver(){
+        return getScore();
     }
 
     public void setX(int x) {

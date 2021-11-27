@@ -61,7 +61,7 @@ public class Obstacle extends Entity{
 
         public void update(){
 
-            if(X < maxX && x < minX){
+            if(X < maxX && X < minX){
                 X -= speed;
         }}
 
@@ -75,4 +75,3 @@ public class Obstacle extends Entity{
 
 
 
-}

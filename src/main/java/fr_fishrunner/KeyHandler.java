@@ -23,7 +23,6 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_Z || code == KeyEvent.VK_W) {
             this.setUpPressed(true);
         }
-
     }
 
     @Override
